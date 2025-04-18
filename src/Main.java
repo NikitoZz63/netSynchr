@@ -14,12 +14,11 @@ public class Main {
 
         for (int i = 0; i < 1000; i++) {
             new Thread(() -> {
+                String way = generateRoute("RLRFR", 100);
+
+                int count = way.length() - way.replace("R", "").length();
 
                 synchronized (sizeToFreq) {
-                    String way = generateRoute("RLRFR", 100);
-
-                    int count = way.length() - way.replace("R", "").length();
-
                     sizeToFreq.compute(count, (key, oldVal) -> oldVal == null ? 1 : oldVal + 1);
                 }
             }).start();
